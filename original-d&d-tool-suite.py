@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 from random import randint
 
 def main():
@@ -106,8 +107,8 @@ def main():
     label_campaign = tk.Label(frame7, text="Campaigns")
     label_campaign.pack(side="left")
 
-    option_menu_campaign = tk.OptionMenu(frame7, None, "")
-    option_menu_campaign.pack(side="left")
+    combobox_campaign = ttk.Combobox(frame7, state="readonly")
+    combobox_campaign.pack(side="left")
 
     button_new_campaign = tk.Button(frame7, text="New")
     button_new_campaign.pack(side="left")
@@ -124,8 +125,8 @@ def main():
     label_character_label = tk.Label(frame8, text="Characters")
     label_character_label.pack(side="left")
 
-    option_menu_character = tk.OptionMenu(frame8, None, "")
-    option_menu_character.pack(side="left")
+    combobox_character = ttk.Combobox(frame8, state="readonly")
+    combobox_character.pack(side="left")
 
     button_new_character = tk.Button(frame8, text="New")
     button_new_character.pack(side="left")
@@ -271,8 +272,8 @@ def main():
     frame1 = tk.Frame(frame_module_adventure_log)
     frame1.pack()
 
-    option_menu_adventure = tk.OptionMenu(frame1, adventure_variable, *adventures)
-    option_menu_adventure.pack(side='left')
+    combobox_adventure = ttk.Combobox(frame1, textvariable=adventure_variable, values=adventures, state="readonly")
+    combobox_adventure.pack(side='left')
 
     button_new_adventure = tk.Button(frame1, text="New")
     button_new_adventure.pack(side='left')
@@ -316,8 +317,8 @@ def main():
     label_monster_type = tk.Label(frame25, text="Monster type")
     label_monster_type.pack(side="left")
     
-    option_menu_monster_type = tk.OptionMenu(frame25, None, "")
-    option_menu_monster_type.pack(side="left")
+    combobox_monster_type = ttk.Combobox(frame25, state="readonly")
+    combobox_monster_type.pack(side="left")
 
     button_add_monster = tk.Button(frame25, text="Add")
     button_add_monster.pack(side="left")
@@ -331,8 +332,8 @@ def main():
     label_monster_id = tk.Label(frame26, text="Monster ID")
     label_monster_id.pack(side="left")
 
-    option_menu_monster_id = tk.OptionMenu(frame26, None, "")
-    option_menu_monster_id.pack(side="left")
+    combobox_monster_id = ttk.Combobox(frame26, state="readonly")
+    combobox_monster_id.pack(side="left")
 
     button_delete_monster = tk.Button(frame26, text="Remove")
     button_delete_monster.pack(side="left")
@@ -340,7 +341,7 @@ def main():
     frame26 = tk.Frame(frame_module_monster_spawner, borderwidth=1, relief="solid")
     frame26.pack()
 
-    scroller = tk.Scrollbar(frame26, orient=tk.VERTICAL)
+    scroller = ttk.Scrollbar(frame26, orient='vertical')
     scroller.pack(side='right', fill='y')
 
     scrollable_canvas = tk.Canvas(frame26, yscrollcommand=scroller.set, width=400, height=150)
