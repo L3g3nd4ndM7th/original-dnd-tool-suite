@@ -1,4 +1,5 @@
 import tkinter as tk
+from random import randint
 
 def main():
     root = tk.Tk()
@@ -11,6 +12,39 @@ def main():
     characters = {
         'New Campaign': 'New Character'
         }
+
+    def roll_dice(dice):
+        dice_multiplier = int(entry_dice_multiplier.get())
+        dice_rolls = int(entry_dice_rolls.get())
+
+        all_rolls = []
+        all_sums = []
+
+        for roll_index in range(dice_rolls):
+            rolls = []
+            dice_sum = 0
+
+            for i in range(dice_multiplier):
+                roll = randint(1, dice)
+                rolls.append(roll)
+                dice_sum += roll
+
+            all_rolls.append(rolls)
+            all_sums.append(dice_sum)
+
+        text_rolls.config(state=tk.NORMAL)
+        text_rolls.insert(tk.END, '\n')
+        text_rolls.insert(tk.END, f'Rolled {dice_rolls} {dice_multiplier}d{dice}:\n')
+        for rolls, dice_sum in zip(all_rolls, all_sums):
+            text_rolls.insert(tk.END, ', '.join(map(str, rolls)))
+            if dice_multiplier > 1:
+                text_rolls.insert(tk.END, f' = {dice_sum}\n')
+            else:
+                text_rolls.insert(tk.END, '\n')
+
+        text_rolls.delete("end-2c", "end-1c")
+        text_rolls.config(state=tk.DISABLED)
+        text_rolls.yview_moveto(1.0)
 
     frame_column1 = tk.Frame(root)
     frame_column1.pack(side='left', expand=True, fill='both')
@@ -36,25 +70,25 @@ def main():
     frame5 = tk.Frame(frame_module_dice_roller)
     frame5.pack()
 
-    button_roll_d4 = tk.Button(frame5, text="d4")
+    button_roll_d4 = tk.Button(frame5, text="d4", command=lambda: roll_dice(4))
     button_roll_d4.pack(side="left")
 
-    button_roll_d6 = tk.Button(frame5, text="d6")
+    button_roll_d6 = tk.Button(frame5, text="d6", command=lambda: roll_dice(6))
     button_roll_d6.pack(side="left")
 
-    button_roll_d8 = tk.Button(frame5, text="d8")
+    button_roll_d8 = tk.Button(frame5, text="d8", command=lambda: roll_dice(8))
     button_roll_d8.pack(side="left")
 
-    button_roll_d10 = tk.Button(frame5, text="d10")
+    button_roll_d10 = tk.Button(frame5, text="d10", command=lambda: roll_dice(10))
     button_roll_d10.pack(side="left")
 
-    button_roll_d12 = tk.Button(frame5, text="d12")
+    button_roll_d12 = tk.Button(frame5, text="d12", command=lambda: roll_dice(12))
     button_roll_d12.pack(side="left")
 
-    button_roll_d20 = tk.Button(frame5, text="d20")
+    button_roll_d20 = tk.Button(frame5, text="d20", command=lambda: roll_dice(20))
     button_roll_d20.pack(side="left")
 
-    button_roll_d100 = tk.Button(frame5, text="d100")
+    button_roll_d100 = tk.Button(frame5, text="d100", command=lambda: roll_dice(100))
     button_roll_d100.pack(side="left")
 
     frame6 = tk.Frame(frame_module_dice_roller)
